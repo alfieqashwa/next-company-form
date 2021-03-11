@@ -1,0 +1,31 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:.dev.db"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Company {
+  id      String   @id @default(cuid())
+  name    String   @unique
+  address String
+  revenue String
+  code    Int
+  phone   Int
+  offices Office[]
+}
+
+model Office {
+  id        String   @id @default(cuid())
+  name      String
+  latitude  String
+  longitude String
+  startDate String
+  Company   Company? @relation(fields: [companyId], references: [id])
+  companyId String?
+}

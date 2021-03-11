@@ -1,9 +1,11 @@
 import { useState } from 'react'
+import Link from 'next/link'
 import { PrismaClient } from '@prisma/client'
 import Head from 'next/head'
 
 import CompanyForm from '../src/components/CompanyForm'
 import OfficeForm from '../src/components/OfficeForm'
+import { CompanyCard } from '../src/components/CompanyCard'
 
 const prisma = new PrismaClient()
 
@@ -45,10 +47,16 @@ export default function Index({ initialCompanies }) {
           } />
           <OfficeForm />
         </section>
-        <section>
-          <div className="mt-10">
-            <pre>{JSON.stringify(companies, null, 2)}</pre>
-          </div>
+        <section className="p-4">
+          <h1 className='my-2 text-3xl'>Companies</h1>
+          {/* <Link href='/offices/id'>Temporary Link</Link> */}
+          <ul className='grid grid-cols-2 gap-x-16 gap-y-10'>
+            {companies.map((c) => (
+              <li key={c.id}>
+                <CompanyCard company={c} />
+              </li>
+            ))}
+          </ul>
         </section>
       </main>
     </>

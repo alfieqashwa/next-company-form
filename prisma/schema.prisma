@@ -14,7 +14,7 @@ model Company {
   id      String   @id @default(cuid())
   name    String   @unique
   address String
-  revenue String
+  revenue Int
   code    Int
   phone   Int
   offices Office[]
@@ -23,8 +23,8 @@ model Company {
 model Office {
   id        String   @id @default(cuid())
   name      String
-  latitude  String
-  longitude String
+  latitude  Float
+  longitude Float
   startDate String
   Company   Company? @relation(fields: [companyId], references: [id])
   companyId String?

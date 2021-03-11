@@ -12,22 +12,47 @@ const Input = (props) => (
   </div>
 )
 
+
 export default function Index({ initialCompanies }) {
   const [companies, setCompanies] = useState(initialCompanies)
   const { register, handleSubmit, errors, watch } = useForm()
+
+  async function saveCompany(company) {
+    const response = await fetch('/api/companies', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(company)
+    });
+
+    if (!response.ok) {
+      throw new Error(response.statusText);
+    }
+    return await response.json();
+  }
+
+  const onSubmit = async (data, e) => {
+    try {
+      await saveCompany(data)
+      setCompanies([...companies, data])
+      e.target.reset()
+    } catch (err) {
+      console.log(err)
+    }
+  }
 
   return (
     <>
       <Head>
         <title>Company Form</title>
         <link rel="icon" href="/favicon.ico" />
+        {/* <meta http-equiv="origin-trial" content="Aurd7QTib2GQwZ/6a4/dy7EflimWWZZQv96Bu7T4rH6KcbovVc2FyuPcrt/3By+2N/FfZcuo2Sq6/vECize1wQsAAABgeyJvcmlnaW4iOiJodHRwOi8vbG9jYWxob3N0OjMwMDAiLCJmZWF0dXJlIjoiVW5yZXN0cmljdGVkU2hhcmVkQXJyYXlCdWZmZXIiLCJleHBpcnkiOjE2MzM0NzgzOTl9"></meta> */}
       </Head>
 
       <main className="max-w-5xl min-h-screen p-20 m-20 mx-auto text-gray-600 bg-gray-300">
         <h1 className='text-2xl text-gray-700'>
           Company Form
         </h1>
-        <form className="">
+        <form onSubmit={handleSubmit(onSubmit)}>
           <div className="space-y-2">
             <Input label="Name" name="name" placeholder="name" type="text" formRef={register({ required: true })} />
             <Input label="Address" name="address" placeholder="address" type="text" formRef={register({ required: true })} />

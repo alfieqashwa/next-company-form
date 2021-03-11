@@ -1,11 +1,11 @@
 async function destroy(id) {
-  const response = await fetch(`/api/companies/delete`, {
+  await fetch(`/api/companies/delete`, {
     method: 'DELETE',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ id })
   })
-
 }
+
 
 export function CompanyCard({ company }) {
 

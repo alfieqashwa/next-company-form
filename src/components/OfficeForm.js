@@ -70,7 +70,7 @@ export default function OfficeForm(props) {
               placeholder='select company'
             >
               {props.companies.map(c => (
-                <option className="capitalize" value={c.id}>{c.name}</option>
+                <option key={c.id} className="capitalize" value={c.id}>{c.name}</option>
               ))}
             </select>
           </div>

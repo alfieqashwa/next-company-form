@@ -6,6 +6,7 @@ import Head from 'next/head'
 import CompanyForm from '../src/components/CompanyForm'
 import OfficeForm from '../src/components/OfficeForm'
 import { CompanyCard } from '../src/components/CompanyCard'
+import { BlankCardMessage } from '../src/components/BlankCardMessage'
 
 const prisma = new PrismaClient()
 
@@ -24,6 +25,11 @@ async function saveCompany(company) {
 
 export default function Index({ initialCompanies }) {
   const [companies, setCompanies] = useState(initialCompanies)
+
+  console.log(companies)
+
+  // there is no
+  //  companies created yet...
 
   return (
     <>
@@ -49,9 +55,12 @@ export default function Index({ initialCompanies }) {
         </section>
         <section className="p-4">
           <h1 className='my-2 text-3xl'>Companies</h1>
-          {/* <Link href='/offices/id'>Temporary Link</Link> */}
+          <Link href='/offices/id'>Temporary Link</Link>
+          {companies.length === 0 && (
+            <BlankCardMessage message="there is no companies created yet..." />
+          )}
           <ul className='grid grid-cols-2 gap-x-16 gap-y-10'>
-            {companies.map((c) => (
+            {companies?.map((c) => (
               <li key={c.id}>
                 <CompanyCard company={c} />
               </li>

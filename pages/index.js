@@ -26,11 +26,6 @@ async function saveCompany(company) {
 export default function Index({ initialCompanies }) {
   const [companies, setCompanies] = useState(initialCompanies)
 
-  console.log(companies)
-
-  // there is no
-  //  companies created yet...
-
   return (
     <>
       <Head>
@@ -74,5 +69,9 @@ export default function Index({ initialCompanies }) {
 
 export async function getServerSideProps() {
   const companies = await prisma.company.findMany()
-  return { props: { initialCompanies: companies } }
+  return {
+    props: {
+      initialCompanies: companies
+    }
+  }
 }

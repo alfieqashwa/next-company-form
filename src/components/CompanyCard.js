@@ -1,21 +1,36 @@
+async function destroy(id) {
+  const response = await fetch(`/api/companies/delete`, {
+    method: 'DELETE',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ id })
+  })
+
+}
+
 export function CompanyCard({ company }) {
+
   return (
     <div className='px-2 pt-1 pb-3 mt-2 text-gray-500 border-2 border-gray-300 rounded-md'>
       <div className='flex justify-between pb-1 border-b border-gray-300'>
         <h2 className='font-semibold capitalize'>{company.name}</h2>
-        <svg
-          className='w-6 h-6'
-          fill='none'
-          stroke='currentColor'
-          viewBox='0 0 24 24'
-          xmlns='http://www.w3.org/2000/svg'>
-          <path
-            strokeLinecap='round'
-            strokeLinejoin='round'
-            strokeWidth={4}
-            d='M6 18L18 6M6 6l12 12'
-          />
-        </svg>
+        <button
+          className="transition duration-150 ease-in-out hover:text-blue-400 focus:outline-none"
+          type="button"
+          onClick={() => destroy(company.id)}>
+          <svg
+            className='w-6 h-6'
+            fill='none'
+            stroke='currentColor'
+            viewBox='0 0 24 24'
+            xmlns='http://www.w3.org/2000/svg'>
+            <path
+              strokeLinecap='round'
+              strokeLinejoin='round'
+              strokeWidth={4}
+              d='M6 18L18 6M6 6l12 12'
+            />
+          </svg>
+        </button>
       </div>
       <div className='px-1'>
         <div className='py-1'>

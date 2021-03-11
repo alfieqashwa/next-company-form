@@ -46,7 +46,7 @@ export default function Index({ initialCompanies }) {
             }
           }
           } />
-          <OfficeForm />
+          <OfficeForm companies={companies} />
         </section>
         <section className="p-4">
           <h1 className='my-2 text-3xl'>Companies</h1>
@@ -56,9 +56,7 @@ export default function Index({ initialCompanies }) {
           )}
           <ul className='grid grid-cols-2 gap-x-16 gap-y-10'>
             {companies?.map((c) => (
-              <li key={c.id}>
-                <CompanyCard company={c} />
-              </li>
+              <CompanyCard key={c.id} company={c} />
             ))}
           </ul>
         </section>

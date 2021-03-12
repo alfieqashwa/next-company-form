@@ -1,13 +1,5 @@
-async function destroy(id) {
-  await fetch(`/api/companies/delete`, {
-    method: 'DELETE',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ id })
-  })
-}
 
-
-export function CompanyCard({ company }) {
+export function CompanyCard({ company, handleClick }) {
 
   return (
     <div className='px-2 pt-1 pb-3 mt-2 text-gray-500 border-2 border-gray-300 rounded-md'>
@@ -16,7 +8,7 @@ export function CompanyCard({ company }) {
         <button
           className="transition duration-150 ease-in-out hover:text-blue-400 focus:outline-none"
           type="button"
-          onClick={() => destroy(company.id)}>
+          onClick={() => removeCompany(company.id)}>
           <svg
             className='w-6 h-6'
             fill='none'
@@ -49,6 +41,15 @@ export function CompanyCard({ company }) {
           </h6>
         </div>
       </div>
-    </div>
+    </div >
   );
+}
+
+async function removeCompany(id) {
+  await fetch(`/api/companies/delete`, {
+    method: 'DELETE',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ id })
+  })
+
 }

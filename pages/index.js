@@ -23,6 +23,8 @@ async function saveCompany(company) {
   return await response.json();
 }
 
+
+
 export default function Index({ initialCompanies }) {
   const [companies, setCompanies] = useState(initialCompanies)
 

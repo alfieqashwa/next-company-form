@@ -1,14 +1,12 @@
 import { useState } from 'react'
-import Link from 'next/link'
-import { PrismaClient } from '@prisma/client'
 import Head from 'next/head'
+import Link from 'next/link'
+import { useQuery } from 'react-query'
 
 import CompanyForm from '../src/components/CompanyForm'
 import OfficeForm from '../src/components/OfficeForm'
 import { CompanyCard } from '../src/components/CompanyCard'
 import { BlankCardMessage } from '../src/components/BlankCardMessage'
-
-const prisma = new PrismaClient()
 
 async function saveCompany(company) {
   const response = await fetch('/api/companies', {
@@ -25,8 +23,17 @@ async function saveCompany(company) {
 
 
 
-export default function Index({ initialCompanies }) {
-  const [companies, setCompanies] = useState(initialCompanies)
+export default function Index() {
+  const { isLoading, error, data: companies } = useQuery('companies', () => (
+    fetch(`${process.env.NEXT_PUBLIC_URL}/api/companies/fetch`).then(res => res.json())
+
+  ))
+
+  if (isLoading) return 'Loading...'
+
+  if (error) return 'An error has occurred: ' + error.message
+
+  console.log(JSON.stringify(companies, null, 4))
 
   return (
     <>
@@ -42,7 +49,7 @@ export default function Index({ initialCompanies }) {
 
       <main className="max-w-4xl min-h-screen px-6 py-4 mx-auto my-10 text-gray-500 border-2 border-gray-300 divide-y-2 divide-gray-300 rounded-xl">
         <section className='flex justify-start pb-10 divide-x-2 divide-gray-300 item-center'>
-          <CompanyForm onSubmit={async (data, e) => {
+          {/* <CompanyForm onSubmit={async (data, e) => {
             try {
               await saveCompany(data)
               setCompanies([...companies, data])
@@ -51,13 +58,13 @@ export default function Index({ initialCompanies }) {
               console.log(err)
             }
           }
-          } />
+          } /> */}
           <OfficeForm companies={companies} />
         </section>
         <section className="p-4">
           <h1 className='my-2 text-3xl'>Companies</h1>
           <Link href='/offices/id'>Temporary Link</Link>
-          {companies.length === 0 && (
+          {companies?.length === undefined && (
             <BlankCardMessage message="there is no companies created yet..." />
           )}
           <ul className='grid grid-cols-2 gap-x-16 gap-y-10'>
@@ -71,13 +78,4 @@ export default function Index({ initialCompanies }) {
       </main>
     </>
   )
-}
-
-export async function getServerSideProps() {
-  const companies = await prisma.company.findMany()
-  return {
-    props: {
-      initialCompanies: companies
-    }
-  }
 }

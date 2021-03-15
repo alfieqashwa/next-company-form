@@ -1,5 +1,5 @@
 
-export function CompanyCard({ company, handleClick }) {
+export function CompanyCard({ company }) {
 
   return (
     <div className='px-2 pt-1 pb-3 mt-2 text-gray-500 border-2 border-gray-300 rounded-md'>
@@ -41,7 +41,7 @@ export function CompanyCard({ company, handleClick }) {
           </h6>
         </div>
       </div>
-    </div >
+    </div>
   );
 }
 

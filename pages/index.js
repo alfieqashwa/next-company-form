@@ -26,12 +26,11 @@ export default function Home() {
     data,
     isError,
     isLoading,
-    isFetching,
     isSuccess
   } = useQuery(
     "companies",
     getCompanies, {
-    // staleTime: 3000, // ms  // experiment: the default is 0 ms
+    // staleTime: 1000, // ms  // experiment: the default is 0 ms
     refetchInterval: 1000, // Refetch the data every second
     // initialData: initialCompanies // use this if using SSR with InitialData
   })
@@ -56,15 +55,16 @@ export default function Home() {
         </section>
         <section className="p-4">
           <h1 className='my-2 text-3xl'>Companies</h1>
-          <Link href='/offices/id'>Temporary Link</Link>
-          {/* {isLoading && <BlankCardMessage message="Loading..." />}
-          {isFetching && <BlankCardMessage message="Fetching..." />}
+          <Link href='/offices/id'><a className="px-3 py-2 text-gray-600 bg-green-200 rounded-md">Temporary Link</a></Link>
+          {isLoading && <BlankCardMessage message="Loading..." />}
           {isError && <BlankCardMessage message="An error has occurred!" />}
-          {data?.length === undefined && (
-            <BlankCardMessage message="there is no companies created yet..." />
-          )} */}
+          {isSuccess && data?.length === 0 && (
+            <div className="flex items-center justify-center p-16">
+              <BlankCardMessage message="there is no companies created yet..." />
+            </div>
+          )}
           <ul className='grid grid-cols-2 gap-x-16 gap-y-10'>
-            {data?.map((c) => (
+            {isSuccess && data?.map((c) => (
               <li key={c.id}>
                 <CompanyCard company={c} />
               </li>

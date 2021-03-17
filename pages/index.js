@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
-import { useQuery } from 'react-query'
-// import { dehydrate } from 'react-query/hydration'
+import { QueryClient, useQuery } from 'react-query'
+import { dehydrate } from 'react-query/hydration'
 
 import CompanyForm from '../components/CompanyForm'
 import OfficeForm from '../components/OfficeForm'
@@ -21,7 +21,7 @@ async function getCompanies() {
   return await response.json();
 }
 
-export default function Home({ initialCompanies }) {
+export default function Home() {
   const {
     data,
     isError,
@@ -32,8 +32,8 @@ export default function Home({ initialCompanies }) {
     "companies",
     getCompanies, {
     // staleTime: 3000, // ms  // experiment: the default is 0 ms
-    refetchInterval: 0, // ms
-    initialData: initialCompanies // use this if using SSR with InitialData
+    // refetchInterval: 0, // ms
+    // initialData: initialCompanies // use this if using SSR with InitialData
   })
 
   // console.log(JSON.stringify(companies, null, 4))
@@ -64,7 +64,7 @@ export default function Home({ initialCompanies }) {
             <BlankCardMessage message="there is no companies created yet..." />
           )} */}
           <ul className='grid grid-cols-2 gap-x-16 gap-y-10'>
-            {data.map((c) => (
+            {data?.map((c) => (
               <li key={c.id}>
                 <CompanyCard company={c} />
               </li>
@@ -77,15 +77,19 @@ export default function Home({ initialCompanies }) {
 }
 
 // SSR with Initial Data
-export async function getServerSideProps() {
-  const initialCompanies = await getCompanies()
-  return { props: { initialCompanies } }
-}
+// export async function getServerSideProps() {
+//   const initialCompanies = await getCompanies()
+//   return { props: { initialCompanies } }
+// }
 
 // SSR with Hydrate
-// export async function getStaticProps() {
-//   const queryClient = new QueryClient()
-//   await queryClient.prefetchQuery("companies", () => getCompanies())
+export async function getServerSideProps() {
+  const queryClient = new QueryClient()
+  await queryClient.prefetchQuery("companies", getCompanies)
 
-//   return { props: { dehydrateState: dehydrate(queryClient) } }
-// }
+  return {
+    props: {
+      dehydrateState: dehydrate(queryClient)
+    }
+  }
+}

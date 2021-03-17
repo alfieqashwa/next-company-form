@@ -1,5 +1,4 @@
-import { useState } from 'react'
-import { useQueryClient, useMutation } from 'react-query'
+import { useMutation, useQueryClient } from 'react-query'
 import { useForm } from 'react-hook-form'
 import { ButtonForm } from './ButtonForm'
 import { Input } from './Input'
@@ -21,64 +20,21 @@ async function createCompany(data) {
 
 
 export default function CompanyForm() {
-  const [errMessage, setErrMessage] = useState("");
+
   const queryClient = useQueryClient();
   const { handleSubmit, errors, register, reset, clearErrors } = useForm()
 
-  const mutation = useMutation(createCompany, {
-    onMutate: async (newCompany) => {
-      // mutate in-progress
-      // use for: spinner, disbled from, etc
-
-      // Optimitic Update:
-      // 1. cancel any outgoing refetch
-      await queryClient.cancelQueries("companies")
-
-      // 2. snapshot the previous value
-      const previousCompanies = queryClient.getQueryData("companies")
-
-      // 3. optimistically update new value
-      if (previousCompanies) {
-        newCompany = { ...newCompany }
-        const latestCompanies = [...previousCompanies, newCompany]
-        queryClient.setQueryData("companies", latestCompanies)
-      }
-      return { previousCompanies }
-    },
-
-    onSettled: async (data, error) => {
-      // mutation done --> success, error
-      if (data) {
-        await queryClient.invalidateQueries("companies")
-        setErrMessage("");
-        // from react-hook-form
-        clearErrors();
-        reset();
-      }
-
-      if (error) {
-        setErrMessage(error.message);
-      }
-    },
-    onError: async (error, _variables, context) => {
-      // mutation done with error response
-      // console.log("onError");
-      setErrMessage(error.message);
-      if (context?.previousCompanies) {
-        queryClient.setQueryData(
-          "companies",
-          context.previousMessages
-        );
-      }
-    },
+  const { status, mutateAsync } = useMutation(createCompany, {
     onSuccess: async () => {
-      console.log("onSuccess")
-    },
+      await queryClient.invalidateQueries("companies");
+      clearErrors();
+      reset();
+    }
   })
 
   const onSubmit = async (data) => {
     // mutation done with success response
-    await mutation.mutate(data)
+    await mutateAsync(data)
   }
 
   return (
@@ -140,7 +96,7 @@ export default function CompanyForm() {
             )}
           </>
         </div>
-        <ButtonForm type="submit" disabled={!!mutation.onMutate} />
+        <ButtonForm type="submit" disabled={status === "loading"} />
       </form>
     </div>
   )

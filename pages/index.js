@@ -8,18 +8,8 @@ import CompanyForm from '../components/CompanyForm'
 import OfficeForm from '../components/OfficeForm'
 import { CompanyCard } from '../components/CompanyCard'
 import { BlankCardMessage } from '../components/BlankCardMessage'
+import { getCompanies } from '../lib/api'
 
-async function getCompanies() {
-  const URL = `${process.env.NEXT_PUBLIC_URL}/api/companies`
-  const response = await fetch(URL, {
-    method: 'GET',
-    headers: { 'Content-Type': 'application/json' },
-  });
-  if (!response.ok) {
-    throw new Error("Fetching Error")
-  }
-  return await response.json();
-}
 
 export default function Home() {
   const {

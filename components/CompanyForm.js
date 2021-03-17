@@ -3,21 +3,7 @@ import { useForm } from 'react-hook-form'
 import { ButtonForm } from './ButtonForm'
 import { Input } from './Input'
 import { FormError } from './ErrorForm'
-
-async function createCompany(data) {
-  const URL = `${process.env.NEXT_PUBLIC_URL}/api/companies/create`
-  const response = await fetch(URL, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(data)
-  });
-
-  if (!response.ok) {
-    throw new Error(response.statusText);
-  }
-  return await response.json();
-}
-
+import { createCompany } from '../lib/api'
 
 export default function CompanyForm() {
 

@@ -1,3 +1,4 @@
+import { removeCompany } from '../lib/api';
 
 export function CompanyCard({ company }) {
 
@@ -45,11 +46,3 @@ export function CompanyCard({ company }) {
   );
 }
 
-async function removeCompany(id) {
-  await fetch(`/api/companies/delete`, {
-    method: 'DELETE',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ id })
-  })
-
-}

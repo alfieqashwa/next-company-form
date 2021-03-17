@@ -1,6 +1,9 @@
+import { useMutation, useQueryClient } from 'react-query'
 import { removeCompany } from '../lib/api';
 
 export function CompanyCard({ company }) {
+
+  const handleClick = () => removeCompany(company.id)
 
   return (
     <div className='px-2 pt-1 pb-3 mt-2 text-gray-500 border-2 border-gray-300 rounded-md'>
@@ -9,7 +12,7 @@ export function CompanyCard({ company }) {
         <button
           className="transition duration-150 ease-in-out hover:text-blue-400 focus:outline-none"
           type="button"
-          onClick={() => removeCompany(company.id)}>
+          onClick={handleClick}>
           <svg
             className='w-6 h-6'
             fill='none'
@@ -45,4 +48,3 @@ export function CompanyCard({ company }) {
     </div>
   );
 }
-

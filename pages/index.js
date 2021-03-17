@@ -32,7 +32,7 @@ export default function Home() {
     "companies",
     getCompanies, {
     // staleTime: 3000, // ms  // experiment: the default is 0 ms
-    // refetchInterval: 0, // ms
+    refetchInterval: 1000, // Refetch the data every second
     // initialData: initialCompanies // use this if using SSR with InitialData
   })
 

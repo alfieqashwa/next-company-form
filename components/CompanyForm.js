@@ -96,7 +96,7 @@ export default function CompanyForm() {
             )}
           </>
         </div>
-        <ButtonForm type="submit" disabled={status === "loading"} />
+        <ButtonForm type="submit" disabled={status === "loading"} disabledTrueStatus="Creating..." disabledFalseStatus="Create" />
       </form>
     </div>
   )

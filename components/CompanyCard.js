@@ -7,7 +7,7 @@ import { Modal } from './Modal';
 export function CompanyCard({ company }) {
   const modalRef = useRef()
   const queryClient = useQueryClient()
-  const { mutateAsync, isLoading } = useMutation(removeCompany)
+  const { mutateAsync, isLoading, isSuccess } = useMutation(removeCompany)
 
   const remove = async () => {
     await mutateAsync(company.id)
@@ -40,8 +40,21 @@ export function CompanyCard({ company }) {
           <div className="w-full space-y-10">
             <h2 className="text-xl font-medium text-center text-red-500">Are you sure ?</h2>
             <div className="flex items-center justify-between px-14">
-              <button className="px-4 py-2 text-sm text-white bg-red-500 rounded-md focus:ring-offset-1 focus:ring-2 focus:ring-red-500 focus:outline-none" type="button" onClick={() => modalRef.current.close()}>Cancel</button>
-              <button className="px-4 py-2 text-sm text-white bg-green-600 rounded-md focus:ring-offset-1 focus:ring-2 focus:ring-green-600 focus:outline-none" type="button">Delete</button>
+              <button className="px-4 py-2 text-sm text-white bg-red-500 rounded-md focus:ring-offset-1 focus:ring-2 focus:ring-red-500 focus:outline-none"
+                type="button"
+                onClick={() => modalRef.current.close()}
+              >
+                Cancel
+              </button>
+              <button className="px-4 py-2 text-sm text-white bg-green-600 rounded-md focus:ring-offset-1 focus:ring-2 focus:ring-green-600 focus:outline-none"
+                type="button"
+                onClick={remove}
+              >{isLoading
+                ? <FaSpinner className="w-5 h-5" />
+                : <h3>Delete</h3>
+                }
+                {isSuccess && modalRef.current.close()}
+              </button>
             </div>
           </div>
         </Modal>

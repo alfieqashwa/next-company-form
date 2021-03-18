@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@prisma/client": "2.18.0",
+    "framer-motion": "^3.10.5",
     "next": "10.0.8",
     "react": "17.0.1",
     "react-datepicker": "^3.6.0",

@@ -1,9 +1,15 @@
 import { useMutation, useQueryClient } from 'react-query'
+import { FaSpinner } from 'react-icons/fa'
 import { removeCompany } from '../lib/api';
 
 export function CompanyCard({ company }) {
+  const queryClient = useQueryClient()
+  const { mutateAsync, isLoading } = useMutation(removeCompany)
 
-  const handleClick = () => removeCompany(company.id)
+  const remove = async () => {
+    await mutateAsync(company.id)
+    queryClient.invalidateQueries("companies")
+  }
 
   return (
     <div className='px-2 pt-1 pb-3 mt-2 text-gray-500 border-2 border-gray-300 rounded-md'>
@@ -12,20 +18,26 @@ export function CompanyCard({ company }) {
         <button
           className="transition duration-150 ease-in-out hover:text-blue-400 focus:outline-none"
           type="button"
-          onClick={handleClick}>
-          <svg
-            className='w-6 h-6'
-            fill='none'
-            stroke='currentColor'
-            viewBox='0 0 24 24'
-            xmlns='http://www.w3.org/2000/svg'>
-            <path
-              strokeLinecap='round'
-              strokeLinejoin='round'
-              strokeWidth={4}
-              d='M6 18L18 6M6 6l12 12'
+          onClick={remove}>
+          {isLoading
+            ? <FaSpinner
+              className='w-5 h-5'
             />
-          </svg>
+            :
+            <svg
+              className='w-6 h-6'
+              fill='none'
+              stroke='currentColor'
+              viewBox='0 0 24 24'
+              xmlns='http://www.w3.org/2000/svg'>
+              <path
+                strokeLinecap='round'
+                strokeLinejoin='round'
+                strokeWidth={4}
+                d='M6 18L18 6M6 6l12 12'
+              />
+            </svg>
+          }
         </button>
       </div>
       <div className='px-1'>

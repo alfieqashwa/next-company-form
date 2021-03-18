@@ -1,8 +1,9 @@
 import { useRef } from 'react'
 import { useMutation, useQueryClient } from 'react-query'
 import { FaSpinner } from 'react-icons/fa'
-import { removeCompany } from '../lib/api';
+
 import { Modal } from './Modal';
+import { removeCompany } from '../lib/api';
 
 export function CompanyCard({ company }) {
   const modalRef = useRef()
@@ -79,28 +80,3 @@ export function CompanyCard({ company }) {
     </div>
   );
 }
-
-{/* <button
-          className="transition duration-150 ease-in-out hover:text-blue-400 focus:outline-none"
-          type="button"
-          onClick={remove}>
-          {isLoading
-            ? <FaSpinner
-              className='w-5 h-5'
-            />
-            :
-            <svg
-              className='w-6 h-6'
-              fill='none'
-              stroke='currentColor'
-              viewBox='0 0 24 24'
-              xmlns='http://www.w3.org/2000/svg'>
-              <path
-                strokeLinecap='round'
-                strokeLinejoin='round'
-                strokeWidth={4}
-                d='M6 18L18 6M6 6l12 12'
-              />
-            </svg>
-          }
-        </button> */}

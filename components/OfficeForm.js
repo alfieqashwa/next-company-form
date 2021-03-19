@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useMutation, useQueryClient } from 'react-query'
 import { useForm, Controller } from 'react-hook-form';
 import DatePicker from 'react-datepicker'
+import format from 'date-fns/format'
 
 import 'react-datepicker/dist/react-datepicker.css'
 
@@ -25,7 +26,10 @@ export default function OfficeForm(props) {
 
   const onSubmit = async (data) => {
     // await mutateAsync(data)
-    await console.log(JSON.stringify(data, null, 2))
+    const { name, latitude, longitude, startDate, companyId
+    } = data;
+    const formatStartDate = format(startDate, 'yyyy-LL-dd')
+    await console.log(JSON.stringify({ name, latitude, longitude, formatStartDate, companyId }, null, 2))
   }
 
   if (props.companies?.length === 0) {
@@ -92,14 +96,14 @@ export default function OfficeForm(props) {
                       selected={value}
                       onChange={onChange}
                       placeholderText="startDate"
-                      dateFormat="yyyy/MM/dd"
+                      dateFormat="yyyy/LL/dd"
                     />
                   }
                 />
-                {errors.startDate && (
-                  <FormError errorMessage="Required date, please!!" />
-                )}
               </div>
+              {errors.startDate && (
+                <FormError errorMessage="Required date, please!!" />
+              )}
             </div>
           </>
         </div>
@@ -111,12 +115,16 @@ export default function OfficeForm(props) {
             className='w-10/12 px-2 py-1 border border-gray-300 rounded-md outline-none'
             type='text'
             name='companyId'
-            placeholder='select company'
+            placeholder='select one...'
+            ref={register({ required: true })}
           >
             {props.companies?.map(c => (
               <option key={c.id} className="capitalize" value={c.id}>{c.name}</option>
             ))}
           </select>
+          {errors.companyId && (
+            <FormError errorMessage="Select one..." />
+          )}
         </div>
         <ButtonForm type="submit" disabled={status === "loading"} disabledTrueStatus="Creating..." disabledFalseStatus="Create" />
       </form>

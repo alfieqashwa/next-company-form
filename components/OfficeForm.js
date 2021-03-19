@@ -1,13 +1,19 @@
+import { useState } from 'react'
 import { useMutation, useQueryClient } from 'react-query'
-import { useForm } from 'react-hook-form';
+import { useForm, Controller } from 'react-hook-form';
+import DatePicker from 'react-datepicker'
+
+import 'react-datepicker/dist/react-datepicker.css'
+
 import { ButtonForm } from './ButtonForm';
 import { Input } from './Input';
 import { FormError } from './ErrorForm'
 import { createOffice } from '../lib/api'
 
 export default function OfficeForm(props) {
+
   const queryClient = useQueryClient()
-  const { handleSubmit, errors, register, reset, clearErrors } = useForm()
+  const { handleSubmit, errors, register, reset, clearErrors, control } = useForm()
 
   const { status, mutateAsync } = useMutation(createOffice, {
     onSuccess: async () => {
@@ -18,7 +24,8 @@ export default function OfficeForm(props) {
   })
 
   const onSubmit = async (data) => {
-    await mutateAsync(data)
+    // await mutateAsync(data)
+    await console.log(JSON.stringify(data, null, 2))
   }
 
   if (props.companies?.length === 0) {
@@ -47,7 +54,7 @@ export default function OfficeForm(props) {
               Location:
           </label>
             <>
-              <Input label="Latitude" name="latitude" placeholder="latitude" type="number" formRef={register({ required: true, min: 1, maxLength: 12 })} />
+              <Input label="Latitude" name="latitude" placeholder="latitude" type="number" step="any" formRef={register({ required: true, min: 0, maxLength: 12 })} />
               {errors.latitude?.type === "required" && (
                 <FormError errorMessage="Name is required" />
               )}
@@ -59,7 +66,7 @@ export default function OfficeForm(props) {
               )}
             </>
             <>
-              <Input label="Longitude" name="longitude" placeholder="longitude" type="number" formRef={register({ required: true, min: 1, maxLength: 12 })} />
+              <Input label="Longitude" name="longitude" placeholder="longitude" type="number" step="any" formRef={register({ required: true, min: 0, maxLength: 12 })} />
               {errors.longitude?.type === "required" && (
                 <FormError errorMessage="Name is required" />
               )}
@@ -72,26 +79,44 @@ export default function OfficeForm(props) {
             </>
           </div>
           <>
-            <Input label="Office Start Date" name="startDate" placeholder="start date" type="text" formRef={register({ required: true })} />
-            {errors.date && (
-              <FormError errorMessage="Pick the date, please!" />
-            )}
+            <div className="px-2">
+              <label className="block font-semibold">Start Date</label>
+              <div className="px-2 py-1 border border-gray-300 rounded-md focus:outline-none">
+                <Controller
+                  name="startDate"
+                  control={control}
+                  defaultValue={null}
+                  rules={{ required: true }}
+                  render={
+                    ({ onChange, value }) => <DatePicker
+                      selected={value}
+                      onChange={onChange}
+                      placeholderText="startDate"
+                      dateFormat="yyyy/MM/dd"
+                    />
+                  }
+                />
+                {errors.startDate && (
+                  <FormError errorMessage="Required date, please!!" />
+                )}
+              </div>
+            </div>
           </>
-          <div className="px-2">
-            <label className='block font-semibold'>
-              Company
+        </div>
+        <div className="px-2">
+          <label className='block font-semibold'>
+            Company
           </label>
-            <select
-              className='w-10/12 px-2 py-1 border border-gray-300 rounded-md outline-none'
-              type='text'
-              name='companyId'
-              placeholder='select company'
-            >
-              {props.companies?.map(c => (
-                <option key={c.id} className="capitalize" value={c.id}>{c.name}</option>
-              ))}
-            </select>
-          </div>
+          <select
+            className='w-10/12 px-2 py-1 border border-gray-300 rounded-md outline-none'
+            type='text'
+            name='companyId'
+            placeholder='select company'
+          >
+            {props.companies?.map(c => (
+              <option key={c.id} className="capitalize" value={c.id}>{c.name}</option>
+            ))}
+          </select>
         </div>
         <ButtonForm type="submit" disabled={status === "loading"} disabledTrueStatus="Creating..." disabledFalseStatus="Create" />
       </form>

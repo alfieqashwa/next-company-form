@@ -26,6 +26,6 @@ model Office {
   latitude  Float
   longitude Float
   startDate String
-  Company   Company? @relation(fields: [companyId], references: [id])
+  company   Company? @relation(fields: [companyId], references: [id])
   companyId String?
 }

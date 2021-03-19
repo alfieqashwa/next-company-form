@@ -27,7 +27,7 @@ export default function CompanyForm() {
     <div className="pl-4 pr-36">
       <h1 className='mb-2 text-3xl'>
         Create Company
-        </h1>
+      </h1>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="px-2 space-y-2">
           <>

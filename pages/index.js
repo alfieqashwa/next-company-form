@@ -41,7 +41,7 @@ export default function Home() {
       <main className="max-w-4xl min-h-screen px-6 py-4 mx-auto my-10 text-gray-500 border-2 border-gray-300 divide-y-2 divide-gray-300 rounded-xl">
         <section className='flex justify-start pb-10 divide-x-2 divide-gray-300 item-center'>
           <CompanyForm />
-          {/* <OfficeForm companies={data} /> */}
+          <OfficeForm companies={data} />
         </section>
         <section className="p-4">
           <h1 className='my-2 text-3xl'>Companies</h1>

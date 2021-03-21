@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import Link from 'next/link'
 import { QueryClient, useQuery } from 'react-query'
 import { dehydrate } from 'react-query/hydration'
 
@@ -49,7 +50,11 @@ export default function Home() {
           <ul className='grid grid-cols-2 gap-x-16 gap-y-10'>
             {isSuccess && data?.map((c) => (
               <li key={c.id}>
-                <CompanyCard company={c} />
+                <Link href={`/companies/${encodeURIComponent(c.id)}`}>
+                  <a>
+                    <CompanyCard company={c} />
+                  </a>
+                </Link>
               </li>
             ))}
           </ul>

@@ -1,5 +1,4 @@
 import { useRef } from 'react'
-import { useRouter } from 'next/router'
 import { useMutation, useQueryClient } from 'react-query'
 import { FaSpinner } from 'react-icons/fa'
 
@@ -7,7 +6,6 @@ import { Modal } from './Modal';
 import { removeCompany } from '../lib/api';
 
 export function CompanyCard({ company }) {
-  const router = useRouter()
   const modalRef = useRef()
   const queryClient = useQueryClient()
   const { mutateAsync, isLoading, isSuccess } = useMutation(removeCompany)
@@ -18,8 +16,7 @@ export function CompanyCard({ company }) {
   }
 
   return (
-    <div onClick={() => router.push('/companies/[id]', `/companies/${company.id}`)} className='px-2 pt-1 pb-3 mt-2 text-gray-500 border-2 border-gray-300 rounded-md'>
-      {/* <Link href={`/companies/${encodeURIComponent(company.id)}`}> */}
+    <div className='px-2 pt-1 pb-3 mt-2 text-gray-500 border-2 border-gray-300 rounded-md'>
       <div className='flex justify-between pb-1 border-b border-gray-300'>
         <h2 className='font-semibold capitalize'>{company.name}</h2>
         <button

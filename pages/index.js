@@ -1,5 +1,4 @@
 import Head from 'next/head'
-import Link from 'next/link'
 import { QueryClient, useQuery } from 'react-query'
 import { dehydrate } from 'react-query/hydration'
 
@@ -20,7 +19,7 @@ export default function Home() {
     "companies",
     getAllCompanies, {
     // staleTime: 1000, // ms  // experiment: the default is 0 ms
-    refetchInterval: 1000, // Refetch the data every second
+    refetchInterval: 2000, // Refetch the data every second
     // initialData: initialCompanies // use this if using SSR with InitialData
   })
 
@@ -36,25 +35,23 @@ export default function Home() {
       <main className="max-w-4xl min-h-screen px-6 py-4 mx-auto my-10 text-gray-500 border-2 border-gray-300 divide-y-2 divide-gray-300 rounded-xl">
         <section className='flex justify-start pb-10 divide-x-2 divide-gray-300 item-center'>
           <CompanyForm />
-          <OfficeForm companies={data} />
+          {isSuccess && data?.length === 0
+            ? (
+              <div className="flex items-center justify-center p-16">
+                <BlankCardMessage message="no companies created yet..." />
+              </div>
+            )
+            : (<OfficeForm companies={data} />)
+          }
         </section>
         <section className="p-4">
           <h1 className='my-2 text-3xl'>Companies</h1>
           {isLoading && <BlankCardMessage message="Loading..." />}
           {isError && <BlankCardMessage message="An error has occurred!" />}
-          {isSuccess && data?.length === 0 && (
-            <div className="flex items-center justify-center p-16">
-              <BlankCardMessage message="there is no companies created yet..." />
-            </div>
-          )}
           <ul className='grid grid-cols-2 gap-x-16 gap-y-10'>
             {isSuccess && data?.map((c) => (
               <li key={c.id}>
-                <Link href={`/companies/${encodeURIComponent(c.id)}`}>
-                  <a>
-                    <CompanyCard company={c} />
-                  </a>
-                </Link>
+                <CompanyCard company={c} />
               </li>
             ))}
           </ul>

@@ -6,6 +6,9 @@ export default async function handle(req, res) {
 
   const result = await prisma.company.delete({
     where: { id: id },
+    include: {
+      offices: true
+    }
   })
   res.json(result)
 }

@@ -1,7 +1,7 @@
 import { useState, forwardRef, useImperativeHandle } from 'react';
 import { motion, AnimatePresence } from 'framer-motion'
 
-export const Modal = forwardRef((props, ref) => {
+export const OfficeModal = forwardRef((props, ref) => {
   const [isOpen, setIsOpen] = useState(false)
   useImperativeHandle(ref, () => {
     return {

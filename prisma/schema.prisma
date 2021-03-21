@@ -12,7 +12,7 @@ generator client {
 
 model Company {
   id      String   @id @default(cuid())
-  name    String   @unique
+  name    String
   address String
   revenue Int
   code    Int

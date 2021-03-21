@@ -25,11 +25,11 @@ export default function OfficeForm(props) {
   })
 
   const onSubmit = async (data) => {
-    // await mutateAsync(data)
-    const { name, latitude, longitude, startDate, companyId
-    } = data;
-    const formatStartDate = format(startDate, 'yyyy-LL-dd')
-    await console.log(JSON.stringify({ name, latitude, longitude, formatStartDate, companyId }, null, 2))
+    await mutateAsync(data)
+    //   const { name, latitude, longitude, startDate, companyId
+    //   } = data;
+    //   const formatStartDate = format(startDate, 'yyyy-LL-dd')
+    //   await console.log(JSON.stringify({ name, latitude, longitude, formatStartDate, companyId }, null, 2))
   }
 
   if (props.companies?.length === 0) {
@@ -96,7 +96,7 @@ export default function OfficeForm(props) {
                       selected={value}
                       onChange={onChange}
                       placeholderText="startDate"
-                      dateFormat="yyyy/LL/dd"
+                      dateFormat="yyyy/MM/dd"
                     />
                   }
                 />
@@ -112,14 +112,14 @@ export default function OfficeForm(props) {
             Company
           </label>
           <select
-            className='w-10/12 px-2 py-1 border border-gray-300 rounded-md outline-none'
+            className='w-10/12 px-2 py-1 capitalize border border-gray-300 rounded-md focus:outline-none focus:ring-2 ring-gray-300 ring-offset-2'
             type='text'
             name='companyId'
             placeholder='select one...'
             ref={register({ required: true })}
           >
             {props.companies?.map(c => (
-              <option key={c.id} className="capitalize" value={c.id}>{c.name}</option>
+              <option key={c.id} value={c.id}>{c.name}</option>
             ))}
           </select>
           {errors.companyId && (
@@ -128,6 +128,15 @@ export default function OfficeForm(props) {
         </div>
         <ButtonForm type="submit" disabled={status === "loading"} disabledTrueStatus="Creating..." disabledFalseStatus="Create" />
       </form>
-    </div >
+      <style jsx>{`
+        .react-datepicker-wrapper,
+        .react-datepicker__input-container,
+        .react-datepicker__input-container input {
+            display: block !important;
+            width: 100% !important;
+            outline: none;
+          }
+      `}</style>
+    </div>
   )
 }

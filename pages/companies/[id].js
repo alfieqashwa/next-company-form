@@ -24,10 +24,6 @@ export default function Company() {
   isLoading &&
     <BlankCardMessage message="Loading..." />
   isError && <BlankCardMessage message="An error has occurred!" />
-  isSuccess && data?.length === 0 &&
-    <div className="flex items-center justify-center p-16">
-      <BlankCardMessage message="there is no companies created yet..." />
-    </div>
 
   return (
     <>
@@ -60,27 +56,23 @@ export default function Company() {
           </section>
           <section className="pt-2">
             <h1 className="my-1 text-3xl">Offices</h1>
+            {isSuccess && data.offices?.length === 0 && (
+              <div className="flex items-center justify-center p-16">
+                <BlankCardMessage message="there is no offices created yet..." />
+              </div>
+            )}
             <ul className='grid grid-cols-2 px-2 gap-x-16 gap-y-10'>
-              {data.offices?.map((o) => (
-                <li key={o.id}>
-                  <OfficeCard office={o} />
-                </li>
-              ))}
+              {data.offices?.map((o) => {
+                return (
+                  <li key={o.id}>
+                    <OfficeCard office={o} />
+                  </li>
+                )
+              })}
             </ul>
           </section>
         </main>
-
       }
-      {/* <div>
-        <pre>{JSON.stringify(data, null, 2)}</pre>
-      </div> */}
     </>
   )
-}
-
-export async function getServerSideProps(ctx) {
-  const queryClient = new QueryClient()
-  await queryClient.prefetchQuery("companies", getAllCompanies)
-
-  return { props: { dehydrateState: dehydrate(queryClient) } }
 }

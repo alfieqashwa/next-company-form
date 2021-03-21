@@ -77,7 +77,7 @@ export default function OfficeForm(props) {
               {errors.longitude?.type === "min" && (
                 <FormError errorMessage="Should be positive float number" />
               )}
-              {errors.latitude?.type === "maxLength" && (
+              {errors.longitude?.type === "maxLength" && (
                 <FormError errorMessage="Max length is 12" />
               )}
             </>

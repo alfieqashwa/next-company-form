@@ -17,7 +17,7 @@ export default function Company() {
     isLoading,
     isSuccess
   } = useQuery(
-    ["companies", id],
+    ["company", id],
     () => getCompany(id)
   )
 

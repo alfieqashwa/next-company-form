@@ -3,16 +3,16 @@ import { useMutation, useQueryClient } from 'react-query'
 import { FaSpinner } from 'react-icons/fa'
 
 import { Modal } from './Modal';
-import { removeCompany } from '../lib/api';
+import { removeOffice } from '../lib/api';
 
-export function CompanyCard({ office }) {
+export function OfficeCard({ office }) {
   const modalRef = useRef()
   const queryClient = useQueryClient()
-  const { mutateAsync, isLoading, isSuccess } = useMutation(removeCompany)
+  const { mutateAsync, isLoading, isSuccess } = useMutation(removeOffice)
 
   const remove = async () => {
     await mutateAsync(office.id)
-    queryClient.invalidateQueries("companies")
+    queryClient.invalidateQueries("company")
   }
 
   return (

@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form'
 import { ButtonForm } from './ButtonForm'
 import { Input } from './Input'
 import { FormError } from './ErrorForm'
+import { TitleForm } from './TitleForm'
 import { createCompany } from '../lib/api'
 
 export default function CompanyForm() {
@@ -24,12 +25,10 @@ export default function CompanyForm() {
   }
 
   return (
-    <div className="pl-4 pr-36">
-      <h1 className='mb-2 text-3xl'>
-        Create Company
-      </h1>
+    <div className="">
+      <TitleForm title="Create Company" />
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="px-2 space-y-2">
+        <div className="px-2 mb-8 space-y-2">
           <>
             <Input label="Name" name="name" placeholder="name" type="text" formRef={register({ required: true })} />
             {errors.name && (
@@ -57,30 +56,35 @@ export default function CompanyForm() {
               <FormError errorMessage="max length is 9 number" />
             )}
           </>
-          <>
-            <Input label="Code" name="code" placeholder="code" type="number" formRef={register({ required: true, min: 1, maxLength: 3 })} />
-            {errors.code?.type === "required" && (
-              <FormError errorMessage="Code is required" />
-            )}
-            {errors.code?.type === "min" && (
-              <FormError errorMessage="Should be positive integer" />
-            )}
-            {errors.code?.type === "maxLength" && (
-              <FormError errorMessage="max code area is 3" />
-            )}
-          </>
-          <>
-            <Input label="Phone" name="phone" placeholder="phone no" type="number" formRef={register({ required: true, min: 1, maxLength: 11 })} />
-            {errors.phone?.type === "required" && (
-              <FormError errorMessage="Phone is required" />
-            )}
-            {errors.phone?.type === "min" && (
-              <FormError errorMessage="Should be positive integer" />
-            )}
-            {errors.phone?.type === "maxLength" && (
-              <FormError errorMessage="max number is 11" />
-            )}
-          </>
+          <div>
+            <label className="block font-semibold">Phone No:</label>
+            <div className="flex space-x-5">
+              <div className="space-y-1">
+                <input className="w-16 px-2 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset" placeholder="code" name="code" type="number" ref={register({ required: true, min: 1, maxLength: 3 })} />
+                {errors.code?.type === "required" && (
+                  <FormError errorMessage="Code is required" />
+                )}
+                {errors.code?.type === "min" && (
+                  <FormError errorMessage="Should be positive integer" />
+                )}
+                {errors.code?.type === "maxLength" && (
+                  <FormError errorMessage="max code area is 3" />
+                )}
+              </div>
+              <div className="space-y-1">
+                <input className="px-2 py-1 border border-gray-300 rounded-md w-60 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset" placeholder="phone no" name="phone" type="number" ref={register({ required: true, min: 1, maxLength: 11 })} />
+                {errors.code?.type === "required" && (
+                  <FormError errorMessage="Code is required" />
+                )}
+                {errors.code?.type === "min" && (
+                  <FormError errorMessage="Should be positive integer" />
+                )}
+                {errors.code?.type === "maxLength" && (
+                  <FormError errorMessage="max code area is 11" />
+                )}
+              </div>
+            </div>
+          </div>
         </div>
         <ButtonForm type="submit" disabled={status === "loading"} disabledTrueStatus="Creating..." disabledFalseStatus="Create" />
       </form>

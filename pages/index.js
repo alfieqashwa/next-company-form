@@ -2,6 +2,7 @@ import Head from 'next/head'
 import { QueryClient, useQuery } from 'react-query'
 import { dehydrate } from 'react-query/hydration'
 
+import Layout from '../components/Layout'
 import CompanyForm from '../components/CompanyForm'
 import OfficeForm from '../components/OfficeForm'
 import { CompanyCard } from '../components/CompanyCard'
@@ -25,39 +26,36 @@ export default function Home() {
 
   // console.log(JSON.stringify(companies, null, 4))
   return (
-    <>
-      <Head>
-        <title>Company Form</title>
-        <link rel="icon" href="/favicon.ico" />
-        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-      </Head>
-
-      <main className="max-w-4xl min-h-screen px-6 py-4 mx-auto my-10 text-gray-500 border-2 border-gray-300 divide-y-2 divide-gray-300 rounded-xl">
-        <section className='flex justify-start pb-10 divide-x-2 divide-gray-300 item-center'>
-          <CompanyForm />
-          {isSuccess && data?.length === 0
-            ? (
-              <div className="flex items-center justify-center p-16">
-                <BlankCardMessage message="no companies created yet..." />
-              </div>
-            )
-            : (<OfficeForm companies={data} />)
-          }
-        </section>
-        <section className="p-4">
-          <h1 className='my-2 text-3xl'>Companies</h1>
-          {isLoading && <BlankCardMessage message="Loading..." />}
-          {isError && <BlankCardMessage message="An error has occurred!" />}
-          <ul className='grid grid-cols-2 gap-x-16 gap-y-10'>
-            {isSuccess && data?.map((c) => (
-              <li key={c.id}>
-                <CompanyCard company={c} />
-              </li>
-            ))}
-          </ul>
-        </section>
-      </main>
-    </>
+    <Layout
+      title="Company Form"
+      main={
+        <>
+          <section className='grid grid-cols-2 pb-10 divide-x-2 divide-gray-300'>
+            <CompanyForm />
+            {isSuccess && data?.length === 0
+              ? (
+                <div className="flex items-center justify-center p-16">
+                  <BlankCardMessage message="no companies created yet..." />
+                </div>
+              )
+              : (<OfficeForm companies={data} />)
+            }
+          </section>
+          <section className="p-4">
+            <h1 className='my-2 text-3xl'>Companies</h1>
+            {isLoading && <BlankCardMessage message="Loading..." />}
+            {isError && <BlankCardMessage message="An error has occurred!" />}
+            <ul className='grid grid-cols-2 gap-x-16 gap-y-10'>
+              {isSuccess && data?.map((c) => (
+                <li key={c.id}>
+                  <CompanyCard company={c} />
+                </li>
+              ))}
+            </ul>
+          </section>
+        </>
+      }
+    />
   )
 }
 

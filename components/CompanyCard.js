@@ -18,7 +18,7 @@ export function CompanyCard({ company }) {
   }
 
   return (
-    <div className='px-2 pt-1 pb-3 mt-2 text-gray-500 transition duration-500 ease-in-out border-2 border-gray-300 rounded-md hover:shadow-2xl'>
+    <div className='px-2 pt-1 pb-3 mt-2 text-gray-500 transition duration-500 ease-in-out border-2 border-gray-300 rounded-lg hover:shadow-2xl'>
       <div className='flex justify-between pb-1 border-b border-gray-300'>
         <h2 className='font-semibold capitalize'>{company.name}</h2>
         <ButtonRemove onClick={() => modalCompanyRef.current.open()} />

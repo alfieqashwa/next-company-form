@@ -2,7 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-/* customizing react-daatepicker style */
+/* customizing react-daatepicker style 
+  source: https://codesandbox.io/s/q7wx24xz44?file=/src/styles.css
+*/
 .react-datepicker-wrapper,
 .react-datepicker__input-container,
 .react-datepicker__input-container input {

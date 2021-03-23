@@ -1,25 +1,17 @@
-import { useState, forwardRef, useImperativeHandle } from 'react';
 import { motion, AnimatePresence } from 'framer-motion'
 
-export const OfficeModal = forwardRef((props, ref) => {
-  const [isOpen, setIsOpen] = useState(false)
-  useImperativeHandle(ref, () => {
-    return {
-      open: () => setIsOpen(true),
-      close: () => setIsOpen(false)
-    }
-  })
+export const Modal = props => {
   return (
     <AnimatePresence >
       {
-        isOpen &&
+        props.isOpen &&
         <>
           <motion.div
             className="fixed top-0 left-0 w-screen h-screen bg-gray-600 bg-opacity-80"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1, transition: { duration: .4 } }}
             exit={{ opacity: 0, transition: { delay: .4 } }}
-            onClick={() => setIsOpen(false)}
+            onClick={props.onClose}
           />
           <motion.div
             className="fixed top-0 bottom-0 left-0 right-0 max-w-xs m-auto rounded-md shadow-md h-1/4 bg-gray-50"
@@ -40,4 +32,4 @@ export const OfficeModal = forwardRef((props, ref) => {
       }
     </AnimatePresence >
   )
-})
+}

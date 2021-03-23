@@ -25,7 +25,9 @@ model Office {
   name      String
   latitude  Float
   longitude Float
-  startDate String
+  startDate String   @map(name: "start_date")
   company   Company? @relation(fields: [companyId], references: [id])
-  companyId String?
+  companyId String?  @map(name: "company_id")
+
+  @@map(name: "offices")
 }

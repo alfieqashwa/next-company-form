@@ -26,7 +26,7 @@ export function OfficeCard({ office }) {
         <ButtonRemove onClick={onOpen} />
         <Modal isOpen={isOpen} onClose={onClose}>
           <div className="w-full space-y-10">
-            <h2 className="text-xl font-medium text-center text-red-500">Are you sure ?</h2>
+            <h2 className="text-xl font-medium text-center text-red-500">Confirmed ?</h2>
             <div className="flex items-center justify-between px-14">
               <button className="px-4 py-2 text-sm text-white transition duration-300 ease-in-out bg-red-500 rounded-md focus:ring-offset-1 focus:ring-2 hover:opacity-75 focus:opacity-100 focus:ring-opacity-75 focus:ring-red-500 focus:outline-none"
                 type="button"

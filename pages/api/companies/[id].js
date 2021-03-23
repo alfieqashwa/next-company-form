@@ -1,6 +1,6 @@
 import { prisma } from '../../../lib/prisma'
 
-// GET
+// GET A COMPANY
 export default async function handle(req, res) {
   const { id } = req.query
 

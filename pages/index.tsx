@@ -2,13 +2,13 @@ import { GetServerSideProps } from 'next';
 import { QueryClient, useQuery } from 'react-query';
 import { dehydrate } from 'react-query/hydration';
 
-import Layout from '../components/Layout';
-import CompanyForm from '../components/CompanyForm';
-import OfficeForm from '../components/OfficeForm';
-import { CompanyCard } from '../components/CompanyCard';
-import { BlankCardMessage } from '../components/BlankCardMessage';
-import { getAllCompanies } from '../lib/api';
-import { Company } from '.prisma/client';
+import Layout from 'components/Layout';
+import CompanyForm from 'components/CompanyForm';
+import OfficeForm from 'components/OfficeForm';
+import { CompanyCard } from 'components/CompanyCard';
+import { BlankCardMessage } from 'components/BlankCardMessage';
+import { getAllCompanies } from 'lib/api';
+import { Company } from 'lib/prisma';
 
 export default function Home() {
   const { data, isError, isLoading, isSuccess } = useQuery(

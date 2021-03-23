@@ -3,7 +3,7 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import { Hydrate } from 'react-query/hydration';
 
-import '../styles/globals.css';
+import 'styles/globals.css';
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   const queryClient = new QueryClient();

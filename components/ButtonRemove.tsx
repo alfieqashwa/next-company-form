@@ -1,7 +1,13 @@
-export const ButtonRemove = ({ onClick }) =>
+import { MouseEvent } from 'react';
+
+export const ButtonRemove = ({
+  onClick,
+}: {
+  onClick(event: MouseEvent<HTMLButtonElement>): void;
+}) => (
   <button
-    className="transition duration-300 ease-in-out hover:scale-125 hover:transform hover:text-gray-700 focus:outline-none focus:ring focus:ring-gray-400"
-    type="button"
+    className='transition duration-300 ease-in-out hover:scale-125 hover:transform hover:text-gray-700 focus:outline-none focus:ring focus:ring-gray-400'
+    type='button'
     onClick={onClick}>
     <svg
       className='w-6 h-6'
@@ -17,3 +23,4 @@ export const ButtonRemove = ({ onClick }) =>
       />
     </svg>
   </button>
+);

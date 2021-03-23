@@ -1,4 +1,3 @@
-import Head from 'next/head'
 import { QueryClient, useQuery } from 'react-query'
 import { dehydrate } from 'react-query/hydration'
 
@@ -30,7 +29,7 @@ export default function Home() {
       title="Company Form"
       main={
         <>
-          <section className='grid grid-cols-2 pb-10 divide-x-2 divide-gray-300'>
+          <section className='grid grid-cols-1 pb-10 space-y-8 md:space-y-0 md:divide-x-2 md:divide-gray-300 md:grid-cols-2'>
             <CompanyForm />
             {isSuccess && data?.length === 0
               ? (
@@ -45,7 +44,7 @@ export default function Home() {
             <h1 className='my-2 text-3xl'>Companies</h1>
             {isLoading && <BlankCardMessage message="Loading..." />}
             {isError && <BlankCardMessage message="An error has occurred!" />}
-            <ul className='grid grid-cols-2 gap-x-16 gap-y-10'>
+            <ul className='grid grid-cols-1 gap-y-8 md:grid-cols-2 md:gap-x-16 md:gap-y-10'>
               {isSuccess && data?.map((c) => (
                 <li key={c.id}>
                   <CompanyCard company={c} />

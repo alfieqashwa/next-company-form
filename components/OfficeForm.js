@@ -43,7 +43,7 @@ export default function OfficeForm(props) {
   }
 
   return (
-    <div className="pl-8">
+    <div className="md:pl-8 bg-indigo-50">
       <TitleForm title="Create Office" />
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="px-2 mb-8 space-y-2">

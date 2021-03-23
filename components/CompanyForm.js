@@ -25,7 +25,7 @@ export default function CompanyForm() {
   }
 
   return (
-    <div className="">
+    <div>
       <TitleForm title="Create Company" />
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="px-2 mb-8 space-y-2">
@@ -72,7 +72,7 @@ export default function CompanyForm() {
                 )}
               </div>
               <div className="space-y-1">
-                <input className="px-2 py-1 border border-gray-300 rounded-md w-60 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset" placeholder="phone no" name="phone" type="number" ref={register({ required: true, min: 1, maxLength: 11 })} />
+                <input className="w-56 px-2 py-1 border border-gray-300 rounded-md md:w-60 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset" placeholder="phone no" name="phone" type="number" ref={register({ required: true, min: 1, maxLength: 11 })} />
                 {errors.code?.type === "required" && (
                   <FormError errorMessage="Code is required" />
                 )}

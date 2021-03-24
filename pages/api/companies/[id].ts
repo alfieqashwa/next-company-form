@@ -1,11 +1,15 @@
-import { prisma } from '../../../lib/prisma'
+import type { NextApiRequest, NextApiResponse } from 'next'
+import { Company, Office, prisma } from 'lib/prisma'
 
 // GET A COMPANY
-export default async function handle(req, res) {
-  const { id } = req.query
+export default async function handle(req: NextApiRequest, res: NextApiResponse) {
+  // const { id }: { [ key: string ]: string | string[] | undefined } = req.query
 
-  const result = await prisma.company.findUnique({
-    where: { id },
+  const { id } = req.query
+  const result: (Company & {
+    offices: Office[];
+  }) | null = await prisma.company.findUnique({
+    where: { id: id.toString() },
     include: { offices: true }
   })
 

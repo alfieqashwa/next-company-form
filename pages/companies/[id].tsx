@@ -6,7 +6,7 @@ import { BlankCardMessage } from 'components/BlankCardMessage';
 import Layout from 'components/Layout';
 import { OfficeCard } from 'components/OfficeCard';
 import { getCompany } from 'lib/api';
-import { Office } from 'lib/prisma';
+import { Office, Prisma } from 'lib/prisma';
 
 export default function Company() {
   const router = useRouter();

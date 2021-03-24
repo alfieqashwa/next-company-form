@@ -2,6 +2,8 @@
 * ========== COMPANY ==========
 */
 
+import { Company, Prisma } from 'lib/prisma';
+
 // READ COMPANIES
 export async function getAllCompanies() {
   const URL = `${process.env.NEXT_PUBLIC_URL}/api/companies`
@@ -18,7 +20,7 @@ export async function getAllCompanies() {
 }
 
 // READ A COMPANY
-export async function getCompany(id) {
+export async function getCompany(id: string | string[] | undefined) {
   const URL = `${process.env.NEXT_PUBLIC_URL}/api/companies/${id}`
   const response = await fetch(URL, {
     method: 'GET',
@@ -33,7 +35,7 @@ export async function getCompany(id) {
 }
 
 // CREATE A COMPANY
-export async function createCompany(data) {
+export async function createCompany(data: Prisma.CompanyCreateInput) {
   const URL = `${process.env.NEXT_PUBLIC_URL}/api/companies/create`
   const response = await fetch(URL, {
     method: 'POST',
@@ -49,7 +51,7 @@ export async function createCompany(data) {
 }
 
 // DELETE A COMPANY
-export async function removeCompany(id) {
+export async function removeCompany(id: string) {
   const URL = `${process.env.NEXT_PUBLIC_URL}/api/companies/delete`
   const response = await fetch(URL, {
     method: 'DELETE',
@@ -64,7 +66,7 @@ export async function removeCompany(id) {
 */
 
 // CREATE AN OFFICE
-export async function createOffice(data) {
+export async function createOffice(data: Prisma.OfficeCreateInput) {
   const URL = `${process.env.NEXT_PUBLIC_URL}/api/offices/create`
   const response = await fetch(URL, {
     method: 'POST',
@@ -80,7 +82,7 @@ export async function createOffice(data) {
 }
 
 // DELETE AN OFFICE
-export async function removeOffice(id) {
+export async function removeOffice(id: string) {
   const URL = `${process.env.NEXT_PUBLIC_URL}/api/offices/delete`
   const response = await fetch(URL, {
     method: 'DELETE',

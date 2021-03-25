@@ -18,13 +18,15 @@ The original implementation requirement is to use **React.js** stack to implemen
 
 ### [Prisma](https://github.com/prisma/prisma)
 
-### I'm using [TypeScript](https://github.com/microsoft/TypeScript) but if you can check the JavaScript version on the branch of its repository: [feat-javascript](https://github.com/alfieqashwa/next-company-form/tree/feat-javascript)
-
 ### Back-End: [PostgreSQL on Heroku](https://www.heroku.com/)
 
 ### Front-End: [Deploy on Vercel](https://vercel.com/)
 
 ### Site: [next-company-form.vercel.app](https://next-company-form.vercel.app)
+
+I'm using [TypeScript](https://github.com/microsoft/TypeScript) but if you can check the JavaScript version on the branch of its repository: [feat-javascript](https://github.com/alfieqashwa/next-company-form/tree/feat-javascript)
+
+---
 
 ## **Overview page**
 

@@ -1,34 +1,73 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## **Implementation Requirements:**
 
-## Getting Started
+The original implementation requirement is to use **React.js** stack to implement the application, **Redux** to manage the data states happened in the application workflow and Webpack to manage the application building process using [this boilerplate](https://github.com/davezuko/react-redux-starter-kit) (React Redux Starter kit) or create-react-app to setup the skeleton and work on it. For details, download the [PDF](https://drive.google.com/drive/folders/1h_JN0WRkO_LRJj6HscGtH02OJjMQpHsF?usp=sharing)
 
-First, run the development server:
+## **What I'm using for the implementation:**
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+### [NextJS](https://github.com/vercel/next.js)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### [React Query](https://github.com/tannerlinsley/react-query)
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+### [TailwindCss](https://github.com/tailwindlabs/tailwindcss)
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+### [React Date Picker](https://github.com/Hacker0x01/react-datepicker)
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+### [Framer Motion](https://github.com/framer/motion)
 
-## Learn More
+### [React Icons](https://github.com/react-icons/react-icons)
 
-To learn more about Next.js, take a look at the following resources:
+### [Prisma](https://github.com/prisma/prisma)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### I'm using [TypeScript](https://github.com/microsoft/TypeScript) but if you can check the JavaScript version on the branch of its repository: [feat-javascript](https://github.com/alfieqashwa/next-company-form/tree/feat-javascript)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+### Back-End: [PostgreSQL on Heroku](https://www.heroku.com/)
 
-## Deploy on Vercel
+### Front-End: [Deploy on Vercel](https://vercel.com/)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Site: [next-company-form.vercel.app](https://next-company-form.vercel.app)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## **Overview page**
+
+1. ### **Company Form**
+
+- [x] Form cannot be submitted when any of input box is empty, and necessary required warning message (label or tooltip) should be shown for the invalid inputs.
+
+- [x] Revenue input should be positive floor number.
+- [x] Two fields of phone number should be both positive integer. Bonus if you can implement country code selection for the “code” input.
+
+2. ### **Office Form**
+
+- [x] Form cannot be submitted when any of input box is empty or unselected, and necessary required warning message (label or tooltip) should be shown for the invalid inputs.
+- [x] Two input fields under location should be both positive float number.
+- [x] Input “Office Start Date” should be able to pop up calendar for user to select the date instead of typing in the date string.
+
+- [x] When successfully creating a new company, proper notification message should be
+      shown and new company information should appear in the section titled
+      “Companies” as a new widget. Moreover, the form should be reset for further use.
+
+- [x] For each of the company widget under the section titled “Companies”, it need to display the company profile information in the format shown in the overview page.
+
+- [x] Each company widget is also clickable, which will redirect user to
+      corresponding offices page.
+- [x] When clicking the cross button on the top right corner, a pop up for
+      confirmation need to be shown out and after confirming, the widget will be
+      removed.
+      If there is no company created in the overview page yet, message “there is no
+      companies created yet” should be displayed in the “Companies” section.
+
+## **Offices Page**
+
+- [x] As the design above shown, company information as well as the information for
+      each office need to be display accordingly. When a new office created in the
+      overview page for one company, it needs to be automatically shown for the offices
+      page of this company.
+
+- [x] For each office widget in section titled “offices”, when clicking the cross button on
+      the top right corner, a pop up for confirmation need to be shown out and after
+      confirming, the widget will be removed.
+
+- [x] If there is no office in the offices page yet, message “there is no office created yet”
+      should be displayed in the “offices” section.
+
+- [x] When clicking the “Back to Overview” page, user will be redirect to the overview
+      page.

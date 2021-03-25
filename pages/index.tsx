@@ -41,14 +41,19 @@ export default function Home() {
             <h1 className='my-2 text-3xl'>Companies</h1>
             {isLoading && <BlankCardMessage message='Loading...' />}
             {isError && <BlankCardMessage message='An error has occurred!' />}
-            <ul className='grid grid-cols-1 gap-y-8 md:grid-cols-2 md:gap-x-16 md:gap-y-10'>
-              {isSuccess &&
-                data?.map((c: Company) => (
+            {isSuccess && data?.length === 0 ? (
+              <div className='flex items-center justify-center p-16'>
+                <BlankCardMessage message='no companies created yet...' />
+              </div>
+            ) : (
+              data?.map((c: Company) => (
+                <ul className='grid grid-cols-1 gap-y-8 md:grid-cols-2 md:gap-x-16 md:gap-y-10'>
                   <li key={c.id}>
                     <CompanyCard company={c} />
                   </li>
-                ))}
-            </ul>
+                </ul>
+              ))
+            )}
           </section>
         </>
       }

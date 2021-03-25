@@ -24,7 +24,7 @@ The original implementation requirement is to use **React.js** stack to implemen
 
 ### Site: [next-company-form.vercel.app](https://next-company-form.vercel.app)
 
-I'm using [TypeScript](https://github.com/microsoft/TypeScript) but if you can check the JavaScript version on the branch of its repository: [feat-javascript](https://github.com/alfieqashwa/next-company-form/tree/feat-javascript)
+I'm using [TypeScript](https://github.com/microsoft/TypeScript), but you can check the JavaScript version on [feat-javascript](https://github.com/alfieqashwa/next-company-form/tree/feat-javascript) branch in its repository.
 
 ---
 

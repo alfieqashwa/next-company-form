@@ -26,7 +26,7 @@ export const Modal = ({ isOpen, onClose, children }: IModal) => {
             exit={{ scale: 0, transition: { delay: 0.4 } }}>
             <motion.div
               className='flex items-center justify-center h-full'
-              initial={{ y: -100, opacity: 0 }}
+              initial={{ y: -50, opacity: 0 }}
               animate={{
                 y: 0,
                 opacity: 1,

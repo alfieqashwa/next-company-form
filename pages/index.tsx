@@ -43,7 +43,7 @@ export default function Home() {
             {isError && <BlankCardMessage message='An error has occurred!' />}
             {isSuccess && data?.length === 0 ? (
               <div className='flex items-center justify-center p-16'>
-                <BlankCardMessage message='no companies created yet...' />
+                <BlankCardMessage message="let's create a company..." />
               </div>
             ) : (
               data?.map((c: Company) => (

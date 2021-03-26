@@ -1,0 +1,25 @@
+@startuml
+title Schema Diagram
+
+class "Company" as Company {
+  +id:string
+  +name:string
+  +address:string
+  +revenue:integer
+  +code:integer
+  +phone:integer
+  +offices:string
+}
+
+class "Office" as Office {
+  +id:string
+  +name:string
+  +latitude:float
+  +longitude:float
+  +start_date:string
+  +company_id:string
+}
+
+Company "1" *-- "many" Office: contains
+
+@enduml

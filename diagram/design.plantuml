@@ -1,0 +1,25 @@
+@startuml
+title Design
+
+[Component] as C #LightSkyBlue
+rectangle "React Query" as RQ #HotPink
+[Server] as S #LightYellow
+
+database "Cache" as Cache
+
+() "fresh" as fresh
+() "stale" as stale
+() "fetching" as fetch
+
+
+C -right-> RQ : 1.Query
+RQ -right-> S: 2.HTTP Request
+RQ -left-> C: 3.isLoading
+S -left-> RQ: 4.HTTP Response
+RQ -down-> Cache: 5. save data
+Cache -down-> fresh: 5.1.flag data to fresh
+fresh -right-> stale: 5.2.flag data to stale
+stale-right-> fetch: 5.3.refetch data
+fetch -up-> S: 5.4.HTTP Request
+Cache -up-> C: 6.read data
+@enduml

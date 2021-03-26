@@ -73,3 +73,15 @@ I'm using [TypeScript](https://github.com/microsoft/TypeScript), but you can che
 
 - [x] When clicking the “Back to Overview” page, user will be redirect to the overview
       page.
+
+---
+
+## Design Model
+
+![system overview](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/alfieqashwa/next-company-form/main/diagram/design.plantuml)
+
+---
+
+## Schema Relation Model
+
+![system overview](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/alfieqashwa/next-company-form/main/diagram/schema.plantuml)

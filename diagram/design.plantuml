@@ -11,6 +11,16 @@ database "Cache" as Cache
 () "stale" as stale
 () "fetching" as fetch
 
+note left of C
+  NextJS
+  ReactJS Framework
+end note
+note right of S
+  using Prisma:
+  A Next-generation ORM
+  for Node.js
+  & TypeScript
+end note
 
 C -right-> RQ : 1.Query
 RQ -right-> S: 2.HTTP Request
